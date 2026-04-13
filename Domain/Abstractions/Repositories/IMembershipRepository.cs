@@ -1,5 +1,8 @@
-﻿namespace Domain.Abstractions.Repositories;
+﻿using Domain.Aggregates.Memberships;
 
-public interface IMembershipRepository
+namespace Domain.Abstractions.Repositories;
+
+//repo för membership som ärver bas-funk.
+public interface IMembershipRepository : IRepositoryBase<Membership, string>
 {
 }
