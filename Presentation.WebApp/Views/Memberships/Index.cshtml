@@ -1,0 +1,20 @@
+﻿@model Presentation.WebApp.Models.MembershipViewModel
+
+<h1>Memberships</h1>
+
+@if (Model.Memberships.Any())
+{
+    <ul>
+        @foreach (var membership in Model.Memberships)
+        {
+            <li>
+                <strong>@membership.Name</strong> - @membership.Price kr
+                <p>@membership.Description</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No memberships found</p>
+}
