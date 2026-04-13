@@ -4,12 +4,12 @@ using Presentation.WebApp.Models;
 
 namespace Presentation.WebApp.Controllers;
 
-// hanterar medlemssidor
+//hanterar medlemssidorna
 public class MembershipsController(IMembershipService service) : Controller
 {
     private readonly IMembershipService _service = service;
 
-    //ska visa alla medlmeskap
+    //ska visa alla medlemskap
     public async Task<IActionResult> Index()
     {
         var memberships = await _service.GetAllAsync();
