@@ -1,6 +1,8 @@
 using Application.Extensions;
 using Infrastructure.Extensions;
 using Infrastructure.Persistence;
+using Infrastructure.Persistence.Contexts;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,10 @@ builder.Services.AddRouting(options =>
 builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
 builder.Services.AddApplication(builder.Configuration, builder.Environment);
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 await PersistenceDatabaseInitializer.InititalizeAsync(app.Services, app.Environment);
@@ -20,6 +26,9 @@ await PersistenceDatabaseInitializer.InititalizeAsync(app.Services, app.Environm
 app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 
