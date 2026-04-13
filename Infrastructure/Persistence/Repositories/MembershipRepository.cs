@@ -9,24 +9,42 @@ namespace Infrastructure.Persistence.Repositories;
 public sealed class MembershipRepository(DataContext context)
     : RepositoryBase<Membership, string, MembershipEntity, DataContext>(context),
       IMembershipRepository
-{
-    protected override void ApplyPropertyUpdates(MembershipEntity entity, Membership model)
-    {
-        throw new NotImplementedException();
-    }
 
-    protected override string GetId(Membership model)
-    {
-        throw new NotImplementedException();
-    }
-
+{// mappar entity --> domain
     protected override Membership ToDomainModel(MembershipEntity entity)
     {
-        throw new NotImplementedException();
+        return new Membership
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Price = entity.Price,
+            Description = entity.Description
+        };
     }
 
+    // mappar domain -> entity
     protected override MembershipEntity ToEntity(Membership model)
     {
-        throw new NotImplementedException();
+        return new MembershipEntity
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Price = model.Price,
+            Description = model.Description
+        };
+    }
+
+    // uppdaterar entity med nya värdeen
+    protected override void ApplyPropertyUpdates(MembershipEntity entity, Membership model)
+    {
+        entity.Name = model.Name;
+        entity.Price = model.Price;
+        entity.Description = model.Description;
+    }
+
+    //hämtar id från domain
+    protected override string GetId(Membership model)
+    {
+        return model.Id;
     }
 }
