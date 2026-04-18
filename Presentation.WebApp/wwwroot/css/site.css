@@ -50,10 +50,13 @@ body {
 /* Header */
 header {
     background-color: var(--header-bg-color);
+    background-image: url('/images/dark-section-background-img.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--header-text-color);
-    border-radius:1.25rem;
+    border-radius: 1.25rem;
     padding: 1rem;
-
 }
 
 /* Footer */
@@ -63,6 +66,27 @@ footer {
     border-radius: 1.25rem;
     padding: 1rem;
 }
+
+/* Button */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    padding: 0.8rem 1.5rem; 
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.8rem; 
+    font-weight: 550; 
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-primary img {
+    width: 6.5px;
+    height: auto;
+    margin-left: 0.5rem; 
+    }
 
 /* menu */
 .menu {
@@ -152,3 +176,134 @@ footer {
     @media (width >= 1400px) {
     }
 }
+
+.account-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.become-member {
+    color: var(--white-color);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+/* hero section */
+.hero-section {
+    background: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
+}
+
+.hero-left {
+    color: white;
+    margin-top: 0;
+    max-width: 500px;
+}
+
+.hero-left h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 1rem 0;
+
+}
+
+.hero-left p {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+
+}
+
+.hero-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-badge {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+.hero-badge img {
+    width: 180px;
+
+}
+
+.hero-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-right img {
+    margin-right: -40px;
+
+}
+
+.hero-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ccc;
+}
+
+.hero-item img {
+    width: 16px;
+
+}
+
+.hero-line {
+    margin: 1.5rem 0;
+    width: 100%;
+}
+
+.top-line {
+    width: 100%;
+    height: 1px;
+    margin-top: 1rem;
+    opacity: 0.6;
+    display: block;
+}
+
+
+/* brands section */
+.brands-section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.brands-container {
+    background-color: var(--primary-color);
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3.5rem;
+}
+
+/* loggor */
+.brands-logos {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.brands-logos a img {
+    height: 28px;
+    width: auto;
+    }
+
+/* höger text */
+.brands-text img {
+    height: 45px;
+    margin-left: 3rem;
+}
+
+

@@ -14,18 +14,26 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
+
+
 <body>
 
     <div class="app-layout">
         <header>
             <partial name="Partials/_HeaderSection" />
+
+            <img src="~/images/horizontal-line.png" class="top-line" />
+
             @if (IsSectionDefined("Hero"))
-            @await RenderSectionAsync("Hero")
+            {
+                @await RenderSectionAsync("Hero")
+            }
         </header>
+
         <main>
-            @RenderBody()
-            main
+            <partial name="Partials/_BrandsSection" />
         </main>
+
         <footer>
             <partial name="Partials/_FooterSection" />
         </footer>
