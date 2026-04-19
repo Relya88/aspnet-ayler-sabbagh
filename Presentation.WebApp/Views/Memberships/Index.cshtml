@@ -1,7 +1,7 @@
 ﻿@using Presentation.WebApp.Models
 @model MembershipViewModel
 
-<h1>Memberships</h1>
+<partial name="Partials/_PageIntroSection" model='"Our Membership Offers"' />
 
 @if (!Model.Memberships.Any())
 {
@@ -9,13 +9,6 @@
 }
 else
 {
-    <ul>
-        @foreach (var m in Model.Memberships)
-        {
-            <li>
-                <strong>@m.Name</strong> - @m.Price kr <br />
-                <span>@m.Description</span>
-            </li>
-        }
-    </ul>
+    <partial name="Partials/_MembershipOffersSection" />
+    <partial name="Partials/_FaqSection" />
 }

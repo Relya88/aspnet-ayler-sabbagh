@@ -17,26 +17,24 @@
 
 
 <body>
-
     <div class="app-layout">
-        <header>
-            <partial name="Partials/_HeaderSection" />
 
-            <img src="~/images/horizontal-line.png" class="top-line" />
-
-            @if (IsSectionDefined("Hero"))
-            {
-                @await RenderSectionAsync("Hero")
-            }
-        </header>
+        <div class="top-section">
+            <header>
+                <partial name="Partials/_HeaderSection" />
+            </header>
+        </div>
 
         <main>
-            <partial name="Partials/_BrandsSection" />
+            @RenderBody()
         </main>
 
-        <footer>
-            <partial name="Partials/_FooterSection" />
-        </footer>
+        @if (!(ViewData["HideFooter"] as bool? ?? false))
+        {
+            <footer>
+                <partial name="Partials/_FooterSection" />
+            </footer>
+        }
     </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,5 +1,4 @@
 ﻿{
-  //devmiljö
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
     "https-dev": {
@@ -10,7 +9,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-      //Prodmiljö
     },
     "https-prod": {
       "commandName": "Project",

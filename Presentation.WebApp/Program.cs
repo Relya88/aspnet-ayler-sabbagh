@@ -26,12 +26,10 @@ await PersistenceDatabaseInitializer.InititalizeAsync(app.Services, app.Environm
 app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseStatusCodePagesWithReExecute("/Error/NotFoundPage");
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseAuthorization();
-
 app.MapStaticAssets();
 
 app.MapControllerRoute(
