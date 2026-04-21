@@ -1,24 +1,8 @@
 @model Presentation.WebApp.Models.RegisterViewModel
 
-<!-- formulär föratt registrera ny användare (tog lite hjälp av chatgpt här) -->
-<form method="post">
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
+@{
+    ViewData["HideFooter"] = true;
+}
 
-    <div>
-        <label>Password</label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-
-    <div>
-        <label>Confirm Password</label>
-        <input asp-for="ConfirmPassword" />
-        <span asp-validation-for="ConfirmPassword"></span>
-    </div>
-
-    <button type="submit">Register</button>
-</form>/>
+<!-- laddar endast partial med design + form -->
+<partial name="Partials/_SignUpSection" model="Model" />

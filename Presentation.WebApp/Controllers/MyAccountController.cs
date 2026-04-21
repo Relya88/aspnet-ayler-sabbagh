@@ -1,11 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.WebApp.Controllers;
 
-// hanterar my account-sidan
+// kräver inloggning för att nå MyAccount
+[Authorize]
 public class MyAccountController : Controller
 {
-    // ska visa my account-sidan
     public IActionResult Index()
     {
         return View();

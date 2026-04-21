@@ -1,7 +1,10 @@
+@model Presentation.WebApp.Models.RegisterViewModel
+
+<!-- registreringssektion kopplad till Identity -->
 <section class="sign-in-section">
     <div class="sign-in-container">
-
         <div class="sign-in-card">
+
             <h1 class="sign-in-title">Become a Member</h1>
 
             <p class="sign-in-text">
@@ -14,8 +17,8 @@
 
             <div class="sign-in-socials">
                 <a href="#" class="sign-in-social-btn">G</a>
-                <a href="#" class="sign-in-social-btn">f</a>
-                <a href="#" class="sign-in-social-btn">◉</a>
+                <a href="#" class="sign-in-social-btn">F</a>
+                <a href="#" class="sign-in-social-btn">O</a>
             </div>
 
             <div class="sign-in-or-wrap">
@@ -24,22 +27,38 @@
                 <div class="sign-in-or-line"></div>
             </div>
 
-            <form class="sign-in-form">
+            <!-- kopplad till RegisterController -->
+            <form method="post" asp-controller="Register" asp-action="Index" class="sign-in-form">
+
                 <div class="sign-in-field">
                     <label>Email Address *</label>
-                    <input type="email" placeholder="Enter Email Address" />
+                    <input asp-for="Email" type="email" placeholder="Enter Email Address" />
+                    <span asp-validation-for="Email"></span>
                 </div>
 
-                <button type="button" class="sign-in-btn">
+                <div class="sign-in-field">
+                    <label>Password *</label>
+                    <input asp-for="Password" type="password" placeholder="Enter Password" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+
+                <div class="sign-in-field">
+                    <label>Confirm Password *</label>
+                    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" />
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <button type="submit" class="sign-in-btn">
                     Continue
-                    <img src="~/images/Arrow-button.png" asp-append-version="true" />
+                    <img src="~/images/Arrow-button.png" asp-append-version="true" alt="" />
                 </button>
+
             </form>
 
             <p class="sign-in-note">
                 We will send a verification code to your email address.
             </p>
-        </div>
 
+        </div>
     </div>
 </section>

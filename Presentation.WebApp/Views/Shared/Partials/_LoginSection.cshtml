@@ -1,7 +1,10 @@
+@model Presentation.WebApp.Models.LoginViewModel
+
+<!-- login-sektion med koppling till Identity -->
 <section class="login-section">
     <div class="login-container">
-
         <div class="login-card">
+
             <h1 class="login-title">Welcome Back!</h1>
 
             <p class="login-text">
@@ -14,8 +17,8 @@
 
             <div class="login-socials">
                 <a href="#" class="login-social-btn">G</a>
-                <a href="#" class="login-social-btn">f</a>
-                <a href="#" class="login-social-btn">◉</a>
+                <a href="#" class="login-social-btn">F</a>
+                <a href="#" class="login-social-btn">O</a>
             </div>
 
             <div class="login-or-wrap">
@@ -24,21 +27,25 @@
                 <div class="login-or-line"></div>
             </div>
 
-            <form class="login-form">
+            <!-- kopplad till LoginController -->
+            <form method="post" asp-controller="Login" asp-action="Index" class="login-form">
+
                 <div class="login-field">
-                    <label for="loginEmail">Email Address *</label>
-                    <input id="loginEmail" type="email" placeholder="Enter Email Address" />
+                    <label>Email Address *</label>
+                    <input asp-for="Email" type="email" placeholder="Enter Email Address" />
+                    <span asp-validation-for="Email"></span>
                 </div>
 
                 <div class="login-field">
                     <div class="login-label-row">
-                        <label for="loginPassword">Password</label>
+                        <label>Password *</label>
                         <a href="#" class="login-forgot-link">Forgot your password?</a>
                     </div>
-                    <input id="loginPassword" type="password" placeholder="Enter Password" />
+                    <input asp-for="Password" type="password" placeholder="Enter Password" />
+                    <span asp-validation-for="Password"></span>
                 </div>
 
-                <button type="button" class="login-btn">
+                <button type="submit" class="login-btn">
                     Continue
                     <img src="~/images/Arrow-button.png" asp-append-version="true" alt="" />
                 </button>
@@ -47,8 +54,9 @@
                     <input type="checkbox" />
                     <span>Accept user terms and conditions</span>
                 </label>
-            </form>
-        </div>
 
+            </form>
+
+        </div>
     </div>
 </section>

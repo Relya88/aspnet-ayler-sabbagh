@@ -27,10 +27,13 @@
                         <span class="my-account-menu-arrow">›</span>
                     </a>
 
-                    <a href="#" class="my-account-menu-item">
+                    
+                    <a href="#" class="my-account-menu-item" onclick="logoutUser(event)">
                         <span>Sign Out</span>
                         <span class="my-account-menu-arrow">›</span>
                     </a>
+
+                    <form id="logoutForm" method="post" asp-controller="Login" asp-action="Logout"></form>
                 </div>
 
                 <div class="my-account-remove-wrap">
@@ -128,3 +131,11 @@
 
     </div>
 </section>
+
+<script>
+    // triggar logout via POST utan att påverka design
+    function logoutUser(e) {
+        e.preventDefault();
+        document.getElementById("logoutForm").submit();
+    }
+</script>
