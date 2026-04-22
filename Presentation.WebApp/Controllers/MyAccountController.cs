@@ -1,14 +1,75 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.WebApp.Models;
 
-namespace Presentation.WebApp.Controllers;
-
-// kräver inloggning för att nå MyAccount
+// kräver inloggning
 [Authorize]
-public class MyAccountController : Controller
+public class MyAccountController(
+    UserManager<IdentityUser> userManager,
+    SignInManager<IdentityUser> signInManager) : Controller
 {
-    public IActionResult Index()
+    private readonly UserManager<IdentityUser> _userManager = userManager;
+    private readonly SignInManager<IdentityUser> _signInManager = signInManager;
+
+    // hämtar user-data
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var user = await _userManager.GetUserAsync(User);
+
+        var model = new MyAccountViewModel
+        {
+            Id = user!.Id,
+            Email = user.Email!,
+            PhoneNumber = user.PhoneNumber
+        };
+
+        return View(model);
+    }
+
+    // uppdaterar user-data
+    [HttpPost]
+    public async Task<IActionResult> Index(MyAccountViewModel model)
+    {
+        foreach (var error in ModelState)
+        {
+            Console.WriteLine($"{error.Key}: {string.Join(", ", error.Value.Errors.Select(e => e.ErrorMessage))}");
+        }
+
+        if (!ModelState.IsValid)
+            return View(model);
+
+        var user = await _userManager.GetUserAsync(User);
+
+        user!.Email = model.Email;
+        user.UserName = model.Email;
+        user.PhoneNumber = model.PhoneNumber;
+
+        await _userManager.UpdateAsync(user);
+
+        Console.WriteLine("USER UPDATED");
+
+        return RedirectToAction("Index");
+    }
+
+    // tar bort användaren och loggar ut korrekt via Identity
+    [HttpPost]
+    public async Task<IActionResult> Delete()
+    {
+        var user = await _userManager.GetUserAsync(User);
+
+        if (user != null)
+        {
+            await _userManager.DeleteAsync(user);
+        }
+
+        // korrekt logout via Identity
+        await _signInManager.SignOutAsync();
+
+        Console.WriteLine("USER DELETED AND LOGGED OUT");
+
+        return RedirectToAction("Index", "Home");
     }
 }

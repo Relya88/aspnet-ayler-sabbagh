@@ -1,8 +1,11 @@
+@model Presentation.WebApp.Models.MyAccountViewModel
+
 <section class="my-account-section">
     <div class="my-account-container">
 
         <div class="my-account-grid">
 
+            <!-- SIDEBAR -->
             <div class="my-account-sidebar">
 
                 <div class="my-account-profile-image">
@@ -27,22 +30,33 @@
                         <span class="my-account-menu-arrow">›</span>
                     </a>
 
-                    
+                    <!-- LOGOUT -->
                     <a href="#" class="my-account-menu-item" onclick="logoutUser(event)">
                         <span>Sign Out</span>
                         <span class="my-account-menu-arrow">›</span>
                     </a>
 
-                    <form id="logoutForm" method="post" asp-controller="Login" asp-action="Logout"></form>
+                    <form id="logoutForm" method="post" asp-controller="Login" asp-action="Logout">
+                        @Html.AntiForgeryToken()
+                    </form>
                 </div>
 
+                <!-- DELETE USER -->
                 <div class="my-account-remove-wrap">
                     <p>If you like to cancel your account click below</p>
-                    <a href="#" class="my-account-remove-link">Remove Account</a>
+
+                    <form method="post" asp-controller="MyAccount" asp-action="Delete">
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit" class="my-account-remove-link" style="all: unset; cursor: pointer;">
+                            Remove Account
+                        </button>
+                    </form>
                 </div>
 
             </div>
 
+            <!-- MAIN -->
             <div class="my-account-main">
 
                 <div class="my-account-form-card">
@@ -50,47 +64,46 @@
 
                     <div class="my-account-divider"></div>
 
-                    <form class="my-account-form">
+                    <!-- UPDATE USER -->
+                    <form method="post" asp-controller="MyAccount" asp-action="Index" class="my-account-form">
+                        <input type="hidden" asp-for="Id" />
                         <div class="my-account-field">
-                            <label for="accountFirstName">First Name</label>
-                            <input id="accountFirstName" type="text" placeholder="Enter First Name" />
+                            <label>First Name</label>
+                            <input asp-for="FirstName" placeholder="Enter First Name" />
+                            <span asp-validation-for="FirstName"></span>
                         </div>
 
                         <div class="my-account-field">
-                            <label for="accountLastName">Last Name</label>
-                            <input id="accountLastName" type="text" placeholder="Enter Last Name" />
+                            <label>Last Name</label>
+                            <input asp-for="LastName" placeholder="Enter Last Name" />
+                            <span asp-validation-for="LastName"></span>
                         </div>
 
                         <div class="my-account-field">
-                            <label for="accountEmail">Email Address *</label>
-                            <input id="accountEmail" type="email" placeholder="username@domain.com" />
+                            <label>Email Address *</label>
+                            <input asp-for="Email" type="email" placeholder="username@domain.com" />
+                            <span asp-validation-for="Email"></span>
                         </div>
 
                         <div class="my-account-field">
-                            <label for="accountPhone">Phone Number</label>
-                            <input id="accountPhone" type="text" placeholder="Enter Phone Number" />
+                            <label>Phone Number</label>
+                            <input asp-for="PhoneNumber" placeholder="Enter Phone Number" />
+                            <span asp-validation-for="PhoneNumber"></span>
                         </div>
 
                         <div class="my-account-divider"></div>
 
-                        <div class="my-account-field">
-                            <label for="accountProfileImage">Profile Image</label>
-
-                            <div class="my-account-upload-row">
-                                <input id="accountProfileImage" type="text" placeholder="Upload Profile Image" />
-                                <button type="button" class="my-account-browse-btn">Browse</button>
-                            </div>
-                        </div>
-
                         <div class="my-account-actions">
-                            <button type="button" class="my-account-save-btn">
+                            <button type="submit" class="my-account-save-btn">
                                 Save
                                 <img src="~/images/Arrow-button.png" asp-append-version="true" alt="" />
                             </button>
                         </div>
+
                     </form>
                 </div>
 
+                <!-- STATS (orörd design) -->
                 <div class="my-account-stats-card">
                     <h2 class="my-account-stats-title">My Statistics</h2>
 
@@ -133,7 +146,6 @@
 </section>
 
 <script>
-    // triggar logout via POST utan att påverka design
     function logoutUser(e) {
         e.preventDefault();
         document.getElementById("logoutForm").submit();
