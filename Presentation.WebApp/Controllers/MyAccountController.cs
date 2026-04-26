@@ -1,3 +1,4 @@
+using Infrastructure.Persistence.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -7,11 +8,11 @@ using Presentation.WebApp.Models;
 // kräver inloggning
 [Authorize]
 public class MyAccountController(
-    UserManager<IdentityUser> userManager,
-    SignInManager<IdentityUser> signInManager) : Controller
+    UserManager<ApplicationUser> userManager,
+    SignInManager<ApplicationUser> signInManager) : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager = userManager;
-    private readonly SignInManager<IdentityUser> _signInManager = signInManager;
+    private readonly UserManager<ApplicationUser> _userManager = userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
 
     // hämtar user-data
     [HttpGet]
@@ -22,6 +23,8 @@ public class MyAccountController(
         var model = new MyAccountViewModel
         {
             Id = user!.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
             Email = user.Email!,
             PhoneNumber = user.PhoneNumber
         };
@@ -43,7 +46,9 @@ public class MyAccountController(
 
         var user = await _userManager.GetUserAsync(User);
 
-        user!.Email = model.Email;
+        user!.FirstName = model.FirstName;
+        user.LastName = model.LastName;
+        user.Email = model.Email;
         user.UserName = model.Email;
         user.PhoneNumber = model.PhoneNumber;
 

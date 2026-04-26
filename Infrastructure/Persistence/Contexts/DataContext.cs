@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Contexts;
 
-// DbContext med Identity+ egna tabeller
+// DbContext med Identity + egna tabeller
 public class DataContext(DbContextOptions<DataContext> options)
-    : IdentityDbContext<IdentityUser>(options)
+    : IdentityDbContext<ApplicationUser, IdentityRole, string>(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder); // viktigt för Identity - tog hjälp av chatgpt
+        base.OnModelCreating(modelBuilder); // viktigt för Identity
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
     }
 
-    //egna tabelller
+    // egna tabeller
     public DbSet<MembershipEntity> Memberships => Set<MembershipEntity>();
 }

@@ -1,3 +1,4 @@
+using Infrastructure.Persistence.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.Models;
@@ -5,9 +6,9 @@ using Presentation.WebApp.Models;
 namespace Presentation.WebApp.Controllers;
 
 // hanterar inloggning via Identity
-public class LoginController(SignInManager<IdentityUser> signInManager) : Controller
+public class LoginController(SignInManager<ApplicationUser> signInManager) : Controller
 {
-    private readonly SignInManager<IdentityUser> _signInManager = signInManager;
+    private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
 
     // visar login-sidan
     [HttpGet]
@@ -18,7 +19,6 @@ public class LoginController(SignInManager<IdentityUser> signInManager) : Contro
 
     // loggar in användaren och redirectar tydligt
     [HttpPost]
-    
     public async Task<IActionResult> Index(LoginViewModel model)
     {
         if (!ModelState.IsValid)
@@ -50,8 +50,6 @@ public class LoginController(SignInManager<IdentityUser> signInManager) : Contro
 
         ModelState.AddModelError(string.Empty, "Fel email eller lösenord");
         return View(model);
-
-
     }
 
     // loggar ut användaren och redirectar till startsidan
@@ -59,7 +57,6 @@ public class LoginController(SignInManager<IdentityUser> signInManager) : Contro
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
     {
-
         Console.WriteLine("USER LOGGED OUT");
 
         await _signInManager.SignOutAsync();
