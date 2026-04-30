@@ -16,6 +16,7 @@ public static class PersistenceDatabaseInitializer
 
         if (env.IsDevelopment())
         {
+            await context.Database.EnsureDeletedAsync(ct);
             await context.Database.EnsureCreatedAsync(ct);
         }
         else

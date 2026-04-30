@@ -5,12 +5,11 @@ using Infrastructure.Persistence.Entities;
 
 namespace Infrastructure.Persistence.Repositories;
 
-//repo som hanterar datanrop för medlemskap och definerar hur Membership konverteras till/från MembershipEntity samt hur uppdateringar av entity görs
 public sealed class MembershipRepository(DataContext context)
     : RepositoryBase<Membership, string, MembershipEntity, DataContext>(context),
       IMembershipRepository
-
-{// mappar entity --> domain
+{
+    // mappar entity --> domain
     protected override Membership ToDomainModel(MembershipEntity entity)
     {
         return new Membership
@@ -18,7 +17,8 @@ public sealed class MembershipRepository(DataContext context)
             Id = entity.Id,
             Name = entity.Name,
             Price = entity.Price,
-            Description = entity.Description
+            Description = entity.Description,
+            UserId = entity.UserId
         };
     }
 
@@ -30,19 +30,20 @@ public sealed class MembershipRepository(DataContext context)
             Id = model.Id,
             Name = model.Name,
             Price = model.Price,
-            Description = model.Description
+            Description = model.Description,
+            UserId = model.UserId
         };
     }
 
-    // uppdaterar entity med nya värdeen
+    // uppdaterar entity med nya värden
     protected override void ApplyPropertyUpdates(MembershipEntity entity, Membership model)
     {
         entity.Name = model.Name;
         entity.Price = model.Price;
         entity.Description = model.Description;
+        entity.UserId = model.UserId;
     }
 
-    //hämtar id från domain
     protected override string GetId(Membership model)
     {
         return model.Id;

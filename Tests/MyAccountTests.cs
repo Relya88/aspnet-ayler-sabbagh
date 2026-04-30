@@ -13,7 +13,6 @@ public class MyAccountTests
     [Fact]
     public async Task Index_Post_ValidModel_UpdatesUser()
     {
-        // Arrange
         var user = new ApplicationUser
         {
             Id = "1",
@@ -52,10 +51,10 @@ public class MyAccountTests
             PhoneNumber = "123456"
         };
 
-        // Act
+
         var result = await controller.Index(model);
 
-        // Assert
+
         Assert.Equal("new@mail.com", user.Email);
         Assert.Equal("new@mail.com", user.UserName);
         Assert.Equal("123456", user.PhoneNumber);

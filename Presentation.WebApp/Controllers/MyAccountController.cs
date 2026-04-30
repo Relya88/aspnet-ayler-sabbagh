@@ -70,7 +70,6 @@ public class MyAccountController(
             await _userManager.DeleteAsync(user);
         }
 
-        // korrekt logout via Identity
         await _signInManager.SignOutAsync();
 
         Console.WriteLine("USER DELETED AND LOGGED OUT");

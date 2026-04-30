@@ -11,7 +11,7 @@ public class DataContext(DbContextOptions<DataContext> options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder); // viktigt för Identity
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
     }
 

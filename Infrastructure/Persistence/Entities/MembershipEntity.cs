@@ -10,4 +10,6 @@ public sealed class MembershipEntity
     public decimal Price { get; set; }
 
     public string Description { get; set; } = null!;
+
+    public string? UserId { get; set; }
 }

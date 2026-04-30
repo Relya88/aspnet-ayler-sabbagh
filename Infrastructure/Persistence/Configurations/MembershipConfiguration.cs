@@ -6,11 +6,9 @@ namespace Infrastructure.Persistence.Configurations;
 
 internal class MembershipConfiguration : IEntityTypeConfiguration<MembershipEntity>
 {
-    //fick ändra metoden helt från throw new NotImplementedException då jag fick mycket error.
-    //tog hjälp av chatgpt
     public void Configure(EntityTypeBuilder<MembershipEntity> builder)
     {
-        builder.HasKey(x => x.Id); // satte primary key
+        builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Name)
             .IsRequired()
@@ -21,5 +19,8 @@ internal class MembershipConfiguration : IEntityTypeConfiguration<MembershipEnti
 
         builder.Property(x => x.Description)
             .HasMaxLength(500);
+
+        builder.Property(x => x.UserId)
+            .IsRequired(false);
     }
 }
