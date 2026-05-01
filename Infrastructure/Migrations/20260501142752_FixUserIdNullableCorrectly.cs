@@ -5,25 +5,32 @@
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FixUserIdNullable : Migration
+    public partial class FixUserIdNullableCorrectly : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "Memberships",
                 type: "TEXT",
                 nullable: true,
-                defaultValue: "");
+                oldClrType: typeof(string),
+                oldType: "TEXT");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            migrationBuilder.AlterColumn<string>(
                 name: "UserId",
-                table: "Memberships");
+                table: "Memberships",
+                type: "TEXT",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "TEXT",
+                oldNullable: true);
         }
     }
 }
