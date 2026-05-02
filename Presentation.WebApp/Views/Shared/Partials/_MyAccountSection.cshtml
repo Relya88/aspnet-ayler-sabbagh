@@ -1,0 +1,148 @@
+@model Presentation.WebApp.Models.MyAccountViewModel
+
+<section class="my-account-section">
+    <div class="my-account-container">
+
+        <div class="my-account-grid">
+
+            <div class="my-account-sidebar">
+
+                <div class="my-account-profile-image">
+                    <img src="~/images/trainer-1.png" asp-append-version="true" alt="Trainer profile" />
+                </div>
+
+                <div class="my-account-menu-card">
+                    <div class="my-account-menu-header">Menu Options</div>
+
+                    <a href="#" class="my-account-menu-item active">
+                        <span>About Me</span>
+                        <span class="my-account-menu-arrow">›</span>
+                    </a>
+
+                    <a href="#" class="my-account-menu-item">
+                        <span>My Membership</span>
+                        <span class="my-account-menu-arrow">›</span>
+                    </a>
+
+                    <a href="#" class="my-account-menu-item">
+                        <span>My Bookings</span>
+                        <span class="my-account-menu-arrow">›</span>
+                    </a>
+
+                    <a href="#" class="my-account-menu-item" onclick="logoutUser(event)">
+                        <span>Sign Out</span>
+                        <span class="my-account-menu-arrow">›</span>
+                    </a>
+
+                    <form id="logoutForm" method="post" asp-controller="Login" asp-action="Logout">
+                        @Html.AntiForgeryToken()
+                    </form>
+                </div>
+
+                <div class="my-account-remove-wrap">
+                    <p>If you like to cancel your account click below</p>
+
+                    <form method="post" asp-controller="MyAccount" asp-action="Delete">
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit" class="my-account-remove-link" style="all: unset; cursor: pointer;">
+                            Remove Account
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="my-account-main">
+
+                <div class="my-account-form-card">
+                    <h2 class="my-account-form-title">About Me</h2>
+
+                    <div class="my-account-divider"></div>
+
+                    <form method="post" asp-controller="MyAccount" asp-action="Index" class="my-account-form">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="my-account-field">
+                            <label>First Name</label>
+                            <input asp-for="FirstName" placeholder="Enter First Name" />
+                            <span asp-validation-for="FirstName"></span>
+                        </div>
+
+                        <div class="my-account-field">
+                            <label>Last Name</label>
+                            <input asp-for="LastName" placeholder="Enter Last Name" />
+                            <span asp-validation-for="LastName"></span>
+                        </div>
+
+                        <div class="my-account-field">
+                            <label>Email Address *</label>
+                            <input asp-for="Email" type="email" placeholder="username@domain.com" />
+                            <span asp-validation-for="Email"></span>
+                        </div>
+
+                        <div class="my-account-field">
+                            <label>Phone Number</label>
+                            <input asp-for="PhoneNumber" placeholder="Enter Phone Number" />
+                            <span asp-validation-for="PhoneNumber"></span>
+                        </div>
+
+                        <div class="my-account-divider"></div>
+
+                        <div class="my-account-actions">
+                            <button type="submit" class="my-account-save-btn">
+                                Save
+                                <img src="~/images/Arrow-button.png" asp-append-version="true" alt="" />
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="my-account-stats-card">
+                    <h2 class="my-account-stats-title">My Statistics</h2>
+
+                    <div class="my-account-stat-item">
+                        <div class="my-account-stat-top">
+                            <span>Check-In (last 30 days)</span>
+                            <span>25</span>
+                        </div>
+                        <div class="my-account-stat-bar">
+                            <div class="my-account-stat-fill fill-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="my-account-stat-item">
+                        <div class="my-account-stat-top">
+                            <span>Weight Goal</span>
+                            <span>50%</span>
+                        </div>
+                        <div class="my-account-stat-bar">
+                            <div class="my-account-stat-fill fill-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="my-account-stat-item">
+                        <div class="my-account-stat-top">
+                            <span>Current BMI</span>
+                            <span>27</span>
+                        </div>
+                        <div class="my-account-stat-bar">
+                            <div class="my-account-stat-fill fill-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<script>
+    function logoutUser(e) {
+        e.preventDefault();
+        document.getElementById("logoutForm").submit();
+    }
+</script>

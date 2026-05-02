@@ -1,29 +1,36 @@
 using Application.Extensions;
 using Infrastructure.Extensions;
+using Infrastructure.Persistence;
+using Infrastructure.Persistence.Contexts;
+using Infrastructure.Persistence.Entities;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRouting(options =>
+{
+    options.LowercaseUrls = true;
+});
 
 builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
 builder.Services.AddApplication(builder.Configuration, builder.Environment);
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+await PersistenceDatabaseInitializer.InititalizeAsync(app.Services, app.Environment);
 
+app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseStatusCodePagesWithReExecute("/Error/NotFoundPage");
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapStaticAssets();
 
 app.MapControllerRoute(

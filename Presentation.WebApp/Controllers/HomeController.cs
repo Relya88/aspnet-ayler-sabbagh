@@ -1,25 +1,15 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Presentation.WebApp.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Presentation.WebApp.Controllers
+namespace Presentation.WebApp.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    // testar om användaren är inloggad
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        if (User.Identity!.IsAuthenticated)
+            Console.WriteLine("USER IS LOGGED IN");
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        return View();
     }
 }

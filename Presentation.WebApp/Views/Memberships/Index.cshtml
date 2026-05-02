@@ -1,0 +1,14 @@
+﻿@using Presentation.WebApp.Models
+@model MembershipViewModel
+
+<partial name="Partials/_PageIntroSection" model='"Our Membership Offers"' />
+
+@if (!Model.Memberships.Any())
+{
+    <p>No memberships found</p>
+}
+else
+{
+    <partial name="Partials/_MembershipOffersSection" />
+    <partial name="Partials/_FaqSection" />
+}

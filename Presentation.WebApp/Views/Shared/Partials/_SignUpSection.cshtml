@@ -1,0 +1,50 @@
+@model Presentation.WebApp.Models.RegisterViewModel
+
+<section class="sign-in-section">
+    <div class="sign-in-container">
+        <div class="sign-in-card">
+
+            <h1 class="sign-in-title">Become a Member</h1>
+
+            <p class="sign-in-text">
+                Sign up to continue your fitness journey with full access to your customized program, training
+                history, and progress tracking. Stay consistent, monitor your development, and keep moving
+                forward with the structure and support built into your account.
+            </p>
+
+            <div class="sign-in-divider"></div>
+
+            <div class="sign-in-socials">
+                <a href="#" class="sign-in-social-btn">G</a>
+                <a href="#" class="sign-in-social-btn">F</a>
+                <a href="#" class="sign-in-social-btn">O</a>
+            </div>
+
+            <div class="sign-in-or-wrap">
+                <div class="sign-in-or-line"></div>
+                <span class="sign-in-or-text">OR CONTINUE WITH</span>
+                <div class="sign-in-or-line"></div>
+            </div>
+
+            <form method="post" asp-controller="Register" asp-action="Index" class="sign-in-form">
+
+                <div class="sign-in-field">
+                    <label>Email Address *</label>
+                    <input asp-for="Email" type="email" placeholder="Enter Email Address" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+
+                <button type="submit" class="sign-in-btn">
+                    Continue
+                    <img src="~/images/Arrow-button.png" asp-append-version="true" alt="" />
+                </button>
+
+            </form>
+
+            <p class="sign-in-note">
+                We will send a verification code to your email address.
+            </p>
+
+        </div>
+    </div>
+</section>

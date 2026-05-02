@@ -1,4 +1,4 @@
-﻿using Infrastructure.Persistence.Extensions;
+﻿using Domain.Abstractions.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +8,7 @@ public static class RepositoryRegistrationExtension
 {
     public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration, IHostEnvironment env)
     {
+        services.AddScoped<IMembershipRepository, MembershipRepository>();
         return services;
     }
 }
